@@ -38,42 +38,37 @@ ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
 
 # Kernel
-BOARD_KERNEL_CMDLINE := \
-	androidboot.hardware=qcom \
-	androidboot.memcg=1 \
-	lpm_levels.sleep_disabled=1 \
-	msm_rtb.filter=0x237 \
-	service_locator.enable=1 \
-	androidboot.usbcontroller=a600000.dwc3 \
-	swiotlb=2048 \
-	androidboot.boot_devices=soc/1d84000.ufshc \
-	androidboot.selinux=permissive
+BOARD_KERNEL_BASE := 0x00000000
+BOARD_KERNEL_IMAGE_NAME := Image.gz
+BOARD_KERNEL_PAGESIZE := 4096
+BOARD_RAMDISK_OFFSET := 0x01000000
+BOARD_KERNEL_SEPARATED_DTBO := true
 
-BOARD_KERNEL_IMAGE_NAME    := Image
-BOARD_KERNEL_PAGESIZE      := 4096
-BOARD_BOOT_HEADER_VERSION  := 2
-BOARD_KERNEL_BASE          := 0x00000000
-BOARD_KERNEL_TAGS_OFFSET   := 0x00000100
-BOARD_KERNEL_OFFSET        := 0x00008000
-BOARD_KERNEL_SECOND_OFFSET := 0x00000000
-BOARD_RAMDISK_OFFSET       := 0x01000000
-BOARD_DTB_OFFSET           := 0x01f00000
-TARGET_KERNEL_ARCH := arm64
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
-BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/recovery_dtbo
-BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)/prebuilt/dtb
-BOARD_INCLUDE_RECOVERY_DTBO := true
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 
-BOARD_MKBOOTIMG_ARGS += \
-	--base $(BOARD_KERNEL_BASE) \
-	--pagesize $(BOARD_KERNEL_PAGESIZE) \
-	--ramdisk_offset $(BOARD_RAMDISK_OFFSET) \
-	--tags_offset $(BOARD_KERNEL_TAGS_OFFSET) \
-	--kernel_offset $(BOARD_KERNEL_OFFSET) \
-	--second_offset $(BOARD_KERNEL_SECOND_OFFSET) \
-	--dtb_offset $(BOARD_DTB_OFFSET) \
-	--header_version $(BOARD_BOOT_HEADER_VERSION)
+BOARD_BOOTIMG_HEADER_VERSION := 2
+BOARD_MKBOOTIMG_ARGS := --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
+
+TARGET_KERNEL_CONFIG := surya_defconfig
+TARGET_KERNEL_HEADERS := kernel/xiaomi/surya
+TARGET_KERNEL_SOURCE := kernel/xiaomi/surya
+
+BOARD_KERNEL_CMDLINE += \
+    kpti=off \
+    swiotlb=1 \
+    loop.max_part=7 \
+    androidboot.memcg=1 \
+    msm_rtb.filter=0x237 \
+    cgroup_disable=pressure \
+    console=ttyMSM0,115200n8 \
+    service_locator.enable=1 \
+    androidboot.hardware=qcom \
+    androidboot.console=ttyMSM0 \
+    lpm_levels.sleep_disabled=1 \
+    cgroup.memory=nokmem,nosocket \
+    earlycon=msm_geni_serial,0x880000 \
+    androidboot.usbcontroller=a600000.dwc3 \
+    androidboot.init_fatal_reboot_target=recovery
 
 # Avb
 BOARD_AVB_ENABLE := true
