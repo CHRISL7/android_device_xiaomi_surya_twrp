@@ -16,6 +16,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
 TW_INCLUDE_FASTBOOTD := true
 
 PRODUCT_PACKAGES += \
+    fastbootd \
 	android.hardware.fastboot@1.1-impl-mock
 
 # API
