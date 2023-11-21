@@ -39,6 +39,7 @@ system                                     /system         ext4    ro,barrier=1,
 system_ext                                 /system_ext     ext4    ro,barrier=1,discard                                 wait,logical
 product                                    /product        ext4    ro,barrier=1,discard                                 wait,logical
 vendor                                     /vendor         ext4    ro,barrier=1,discard                                 wait,logical
+odm                                        /odm            ext4    ro,barrier=1,discard                                 wait,logical
 /dev/block/bootdevice/by-name/cache        /cache          ext4    nosuid,noatime,nodev,barrier=1                       wait
 /dev/block/bootdevice/by-name/metadata     /metadata       ext4    noatime,nosuid,nodev,discard                         wait,formattable,wrappedkey,display=Metadata
 /dev/block/bootdevice/by-name/userdata     /data           f2fs    noatime,nosuid,nodev,reserve_root=32768,resgid=1065,fsync_mode=nobarrier,inlinecrypt,checkpoint_merge    latemount,wait,formattable,fileencryption=ice,wrappedkey,keydirectory=/metadata/vold/metadata_encryption
