@@ -19,6 +19,12 @@ PRODUCT_PACKAGES += \
     fastbootd \
 	android.hardware.fastboot@1.1-impl-mock
 
+# f2fs utilities
+PRODUCT_PACKAGES += \
+    sg_write_buffer \
+    f2fs_io \
+    check_f2fs
+
 # API
 PRODUCT_SHIPPING_API_LEVEL := 29
 
