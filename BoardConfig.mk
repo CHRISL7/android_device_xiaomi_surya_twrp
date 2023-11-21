@@ -52,6 +52,7 @@ BOARD_MKBOOTIMG_ARGS := --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 TARGET_KERNEL_CONFIG := surya_defconfig
 TARGET_KERNEL_HEADERS := kernel/xiaomi/surya
 TARGET_KERNEL_SOURCE := kernel/xiaomi/surya
+BOARD_RAMDISK_USE_LZ4 := true
 
 BOARD_KERNEL_CMDLINE += \
     kpti=off \
