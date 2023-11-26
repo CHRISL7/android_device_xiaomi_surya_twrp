@@ -18,6 +18,13 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
 
+# Crypto
+PRODUCT_SYSTEM_PROPERTIES += \
+    ro.crypto.dm_default_key.options_format.version=2 \
+    ro.crypto.volume.metadata.method=dm-default-key \
+    ro.crypto.volume.filenames_mode=aes-256-cts \
+    ro.crypto.volume.options=::v2
+
 # Fastbootd
 TW_INCLUDE_FASTBOOTD := true
 
